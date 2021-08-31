@@ -1,16 +1,19 @@
-# This is a sample Python script.
+""" A simple TCP client in Python """
+import socket
 
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+target_host = "www.google.com"
+target_port = 80
 
+# create a socket object
+client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
+# connect the client
+client.connect((target_host, target_port))
 
+# send some data
+message = 'GET / HTTP:/1.1\r\nHost: google.com\r\n\r\n'
+client.send(message.encode())
+response = client.recv(4096)
 
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
+print(response)
 
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
